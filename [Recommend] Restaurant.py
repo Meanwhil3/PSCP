@@ -1,21 +1,16 @@
 """[Recommend] Restaurant"""
 
-def main():
+def main(buy, promotion, dis, must_buy):
     """[Recommend] Restaurant"""
-    price = float(input())
-    promotion = float(input())
-    coupon = float(input())
-    must_buy = float(input())
-    total_price = price + must_buy
-    total = total_price*(coupon/100)
-    ans = total_price-total
-    if price == promotion:
+    total = buy + must_buy
+    if total >= promotion:
+        total -= total*(dis/100)
+    if buy >= promotion:
+        buy -= buy*(dis/100)
+    if total > buy:
+        print("No %.03f" %(total - buy))
+    elif total < buy:
+        print("Yes %.03f" %(buy - total))
+    else:
         print("Yes")
-    elif price > promotion:
-        print("Yes %.3f" %(price-ans))
-    elif promotion > price:
-        if ans < price:
-            print("Yes %.3f" %(price-ans))
-        elif ans > price:
-            print("No %.3f" %(ans-price))
-main()
+main(float(input()), float(input()), float(input()), float(input()))
